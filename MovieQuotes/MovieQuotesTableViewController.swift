@@ -40,6 +40,15 @@ class MovieQuotesTableViewController: UITableViewController {
         movieQuotes.append(mq2)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+    
     //the override in objectC
     @objc func showAddQuoteDialog(){
         print("you pressed the add button")
@@ -123,7 +132,6 @@ class MovieQuotesTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == kMovieQuoteDetailSegue{
-            print("segue match")
             // Get the new view controller using segue.destination.
             let mqdvc = segue.destination as! MovieQuoteDetailViewController
             if let indexPath = tableView.indexPathForSelectedRow {
