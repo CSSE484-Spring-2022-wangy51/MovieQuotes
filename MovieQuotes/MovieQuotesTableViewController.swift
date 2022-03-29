@@ -46,6 +46,15 @@ class MovieQuotesTableViewController: UITableViewController {
         let alertController = UIAlertController(title: "Create a new movie quote",
                                                 message: "",
                                                 preferredStyle: UIAlertController.Style.alert)
+        
+        alertController.addTextField { textField in
+            textField.placeholder = "Quote"//the grey word
+        }
+        
+        alertController.addTextField { textField in
+            textField.placeholder = "Movie"//the grey word
+        }
+        
         //create an action and add it to the controller
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel) { action in
             print("You pressed cancel")
@@ -55,6 +64,16 @@ class MovieQuotesTableViewController: UITableViewController {
         //positive button
         let createQuoteAction = UIAlertAction(title: "Create quote", style: UIAlertAction.Style.default) { action in
             print("You pressed create quote")
+            
+            let quoteTextField = alertController.textFields![0] as UITextField
+            let movieTextField = alertController.textFields![1] as UITextField
+            print("Quote: \(quoteTextField.text!)")
+            print("Movie: \(movieTextField.text!)")
+            
+            let mq = MovieQuote(quote: quoteTextField.text!, movie: movieTextField.text!)
+            self.movieQuotes.insert(mq, at: 0)
+            self.tableView.reloadData()
+            
         }
         alertController.addAction(createQuoteAction)
         
