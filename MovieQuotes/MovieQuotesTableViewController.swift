@@ -42,7 +42,12 @@ class MovieQuotesTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        MovieQuotesCollectionManager.shared.startListening()
+        MovieQuotesCollectionManager.shared.startListening{
+            print("The movie quote were updated")
+            for mq in MovieQuotesCollectionManager.shared.latestMovieQuotes {
+                print("\(mq.quote) on \(mq.movie)")
+            }
+        }
         tableView.reloadData()
     }
     

@@ -19,7 +19,7 @@ class MovieQuotesCollectionManager{
     
     var latestMovieQuotes = [MovieQuote]()
     
-    func startListening(){
+    func startListening(changeListener: @escaping (() -> Void)){// recieves a function that takes no parameter and return void
         //TODO: receive change listener
         
         let query = _collectionRef.order(by: kMovieQuoteLastTouched, descending: true).limit(to: 50)// order the collection
@@ -29,9 +29,12 @@ class MovieQuotesCollectionManager{
                     print("Error fetching documents: \(error!)")
                     return
                 }
+            self.latestMovieQuotes.removeAll()
                 for document in documents {
                     print("\(document.documentID) => \(document.data())")
+                    self.latestMovieQuotes.append(MovieQuote(doucmentSnapshot: document))
                 }
+                changeListener()
             }
         
     }
