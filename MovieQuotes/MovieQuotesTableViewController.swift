@@ -18,7 +18,7 @@ class MovieQuotesTableViewController: UITableViewController {
     let kMovieQuoteCell = "MovieQuoteCell"// k for constant
     let kMovieQuoteDetailSegue = "myMovieQuoteDetailSegue"
 //    let names = ["Helen", "Lisa", "Peter","Dave"]
-    var movieQuotes = [MovieQuote]()
+//    var movieQuotes = [MovieQuote]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,21 +34,22 @@ class MovieQuotesTableViewController: UITableViewController {
                                                                  action: #selector(showAddQuoteDialog))
         
         //Hard code some movie quotes
-        let mq1 = MovieQuote(quote: "I'll be back", movie: "The Terminator")
-        let mq2 = MovieQuote(quote: "Yo Adrian", movie: "Rocky")
-        movieQuotes.append(mq1)
-        movieQuotes.append(mq2)
+//        let mq1 = MovieQuote(quote: "I'll be back", movie: "The Terminator")
+//        let mq2 = MovieQuote(quote: "Yo Adrian", movie: "Rocky")
+//        movieQuotes.append(mq1)
+//        movieQuotes.append(mq2)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         MovieQuotesCollectionManager.shared.startListening{
-            print("The movie quote were updated")
-            for mq in MovieQuotesCollectionManager.shared.latestMovieQuotes {
-                print("\(mq.quote) on \(mq.movie)")
-            }
+//            print("The movie quote were updated")
+//            for mq in MovieQuotesCollectionManager.shared.latestMovieQuotes {
+//                print("\(mq.quote) on \(mq.movie)")
+//            }
+            self.tableView.reloadData()
         }
-        tableView.reloadData()
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -88,8 +89,10 @@ class MovieQuotesTableViewController: UITableViewController {
             print("Movie: \(movieTextField.text!)")
             
             let mq = MovieQuote(quote: quoteTextField.text!, movie: movieTextField.text!)
-            self.movieQuotes.insert(mq, at: 0)
-            self.tableView.reloadData()
+//            self.movieQuotes.insert(mq, at: 0)
+//            self.tableView.reloadData()
+            //TODO: figure out if this works
+            MovieQuotesCollectionManager.shared.add(mq)
             
         }
         alertController.addAction(createQuoteAction)
@@ -102,7 +105,8 @@ class MovieQuotesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // return the number of rows
-        return movieQuotes.count
+//        return movieQuotes.count
+        return MovieQuotesCollectionManager.shared.latestMovieQuotes.count
     }
 
     
@@ -115,8 +119,11 @@ class MovieQuotesTableViewController: UITableViewController {
 //        cell.textLabel?.text = movieQuotes[indexPath.row].quote
 //        cell.detailTextLabel?.text = movieQuotes[indexPath.row].movie
         
-        cell.quoteLabel.text = movieQuotes[indexPath.row].quote
-        cell.movieLabel.text = movieQuotes[indexPath.row].movie
+//        cell.quoteLabel.text = movieQuotes[indexPath.row].quote
+//        cell.movieLabel.text = movieQuotes[indexPath.row].movie
+        let mq = MovieQuotesCollectionManager.shared.latestMovieQuotes[indexPath.row]
+        cell.quoteLabel.text = mq.quote
+        cell.movieLabel.text = mq.movie
 
         return cell
     }
@@ -126,9 +133,9 @@ class MovieQuotesTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            //implement delete
-            movieQuotes.remove(at: indexPath.row)
-            tableView.reloadData()
+            //TODO: implement delete
+//            movieQuotes.remove(at: indexPath.row)
+//            tableView.reloadData()
         }
     }
     
@@ -143,7 +150,9 @@ class MovieQuotesTableViewController: UITableViewController {
             let mqdvc = segue.destination as! MovieQuoteDetailViewController
             if let indexPath = tableView.indexPathForSelectedRow {
                 // Pass the selected object to the new view controller.
-                mqdvc.movieQuote = movieQuotes[indexPath.row]
+//                mqdvc.movieQuote = movieQuotes[indexPath.row]
+                //TODO: inform the detail view about eh MovieQuote
+                //Note: For now this will CRASH!!!
             }
         }
     }

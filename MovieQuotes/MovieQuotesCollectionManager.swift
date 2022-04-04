@@ -44,10 +44,18 @@ class MovieQuotesCollectionManager{
     }
     
     func add(_ mq: MovieQuote){
-        
+        _collectionRef.addDocument(data: [
+            kMovieQuoteQuote : mq.quote,
+            kMovieQuoteMovie: mq.movie,
+            kMovieQuoteLastTouched: Timestamp.init()
+        ]){err in
+            if let err = err {
+                print("Error adding document \(err)")
+            }
+        }
     }
-    
     func delete(_ documentId: String){
         
     }
 }
+
