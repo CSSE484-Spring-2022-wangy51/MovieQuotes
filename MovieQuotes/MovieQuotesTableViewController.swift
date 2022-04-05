@@ -91,7 +91,7 @@ class MovieQuotesTableViewController: UITableViewController {
             let mq = MovieQuote(quote: quoteTextField.text!, movie: movieTextField.text!)
 //            self.movieQuotes.insert(mq, at: 0)
 //            self.tableView.reloadData()
-            //TODO: figure out if this works
+            
             MovieQuotesCollectionManager.shared.add(mq)
             
         }
@@ -133,9 +133,9 @@ class MovieQuotesTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            //TODO: implement delete
-//            movieQuotes.remove(at: indexPath.row)
-//            tableView.reloadData()
+            
+            let mqToDelete = MovieQuotesCollectionManager.shared.latestMovieQuotes[indexPath.row]
+            MovieQuotesCollectionManager.shared.delete(mqToDelete.documentID!)
         }
     }
     

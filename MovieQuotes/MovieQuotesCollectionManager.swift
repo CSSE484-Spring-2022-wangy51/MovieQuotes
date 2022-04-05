@@ -55,6 +55,13 @@ class MovieQuotesCollectionManager{
         }
     }
     func delete(_ documentId: String){
+        _collectionRef.document(documentId).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
         
     }
 }
