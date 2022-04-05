@@ -13,6 +13,8 @@ class MovieQuotesCollectionManager{
     // swift singleten
     static let shared = MovieQuotesCollectionManager()
     var _collectionRef: CollectionReference
+    var listenerRegistration: ListenerRegistration?
+    
     private init(){
         _collectionRef = Firestore.firestore().collection(kMovieQuotesCollectionPath)
     }
@@ -20,11 +22,11 @@ class MovieQuotesCollectionManager{
     var latestMovieQuotes = [MovieQuote]()
     
     func startListening(changeListener: @escaping (() -> Void)){// recieves a function that takes no parameter and return void
-        //TODO: receive change listener
+        //DONE: receive change listener
         
         let query = _collectionRef.order(by: kMovieQuoteLastTouched, descending: true).limit(to: 50)// order the collection
         
-        query.addSnapshotListener { querySnapshot, error in
+        listenerRegistration = query.addSnapshotListener { querySnapshot, error in
                 guard let documents = querySnapshot?.documents else {// if exist then carry on, else stop and print
                     print("Error fetching documents: \(error!)")
                     return
@@ -40,7 +42,9 @@ class MovieQuotesCollectionManager{
     }
     
     func stopListening(){
-        //TODO: receive change listener
+        print("Removing the listener")
+        listenerRegistration?.remove();
+        
     }
     
     func add(_ mq: MovieQuote){

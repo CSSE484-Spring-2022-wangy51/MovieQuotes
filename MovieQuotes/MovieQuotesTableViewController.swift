@@ -151,7 +151,7 @@ class MovieQuotesTableViewController: UITableViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
                 // Pass the selected object to the new view controller.
 //                mqdvc.movieQuote = movieQuotes[indexPath.row]
-                //TODO: inform the detail view about eh MovieQuote
+                //TODO: inform the detail view about the MovieQuote
                 //Note: For now this will CRASH!!!
             }
         }

@@ -12,7 +12,7 @@ class MovieQuoteDetailViewController: UIViewController {
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var movieLabel: UILabel!
     
-    var movieQuote: MovieQuote!
+//    var movieQuote: MovieQuote!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +30,9 @@ class MovieQuoteDetailViewController: UIViewController {
 //    }
     
     func updateView(){
-        quoteLabel.text = movieQuote.quote
-        movieLabel.text = movieQuote.movie
+        //TODO: update the view using the manager
+//        quoteLabel.text = movieQuote.quote
+//        movieLabel.text = movieQuote.movie
     }
     
     @objc func showEditQuoteDialog(){
@@ -43,12 +44,14 @@ class MovieQuoteDetailViewController: UIViewController {
         
         alertController.addTextField { textField in
             textField.placeholder = "Quote"//the grey word
-            textField.text = self.movieQuote.quote
+//            textField.text = self.movieQuote.quote
+            //TODO: Put in the quote from the manager's data
         }
         
         alertController.addTextField { textField in
             textField.placeholder = "Movie"//the grey word
-            textField.text = self.movieQuote.movie
+//            textField.text = self.movieQuote.movie
+            //TODO: Put in the quote from the manager's data
         }
         
         //create an action and add it to the controller
@@ -65,10 +68,11 @@ class MovieQuoteDetailViewController: UIViewController {
             print("Quote: \(quoteTextField.text!)")
             print("Movie: \(movieTextField.text!)")
             
-            self.movieQuote.quote = quoteTextField.text!
-            self.movieQuote.movie = movieTextField.text!
-            self.updateView()
+//            self.movieQuote.quote = quoteTextField.text!
+//            self.movieQuote.movie = movieTextField.text!
+//            self.updateView()
             
+            //TODO: implement update
         }
         alertController.addAction(editQuoteAction)
         
