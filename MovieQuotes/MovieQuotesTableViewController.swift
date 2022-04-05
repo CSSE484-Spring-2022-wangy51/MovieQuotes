@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MovieQuoteTableViewCell: UITableViewCell{
     @IBOutlet weak var quoteLabel: UILabel!
@@ -17,6 +18,7 @@ class MovieQuotesTableViewController: UITableViewController {
     
     let kMovieQuoteCell = "MovieQuoteCell"// k for constant
     let kMovieQuoteDetailSegue = "myMovieQuoteDetailSegue"
+    var movieQuotesListenerRegistration: ListenerRegistration?
 //    let names = ["Helen", "Lisa", "Peter","Dave"]
 //    var movieQuotes = [MovieQuote]()
 
@@ -42,7 +44,7 @@ class MovieQuotesTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        MovieQuotesCollectionManager.shared.startListening{
+        movieQuotesListenerRegistration = MovieQuotesCollectionManager.shared.startListening{
 //            print("The movie quote were updated")
 //            for mq in MovieQuotesCollectionManager.shared.latestMovieQuotes {
 //                print("\(mq.quote) on \(mq.movie)")
@@ -54,7 +56,7 @@ class MovieQuotesTableViewController: UITableViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        MovieQuotesCollectionManager.shared.stopListening()
+        MovieQuotesCollectionManager.shared.stopListening(movieQuotesListenerRegistration)
     }
     
     //the override in objectC
@@ -151,8 +153,12 @@ class MovieQuotesTableViewController: UITableViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
                 // Pass the selected object to the new view controller.
 //                mqdvc.movieQuote = movieQuotes[indexPath.row]
+                
                 //TODO: inform the detail view about the MovieQuote
-                //Note: For now this will CRASH!!!
+                let mq = MovieQuotesCollectionManager.shared.latestMovieQuotes[indexPath.row]
+                mqdvc.movieQuoteDocumentID = mq.documentID
+                
+                
             }
         }
     }

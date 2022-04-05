@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import Firebase
 
 class MovieQuoteDetailViewController: UIViewController {
 
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var movieLabel: UILabel!
+    
+    var movieQuoteDocumentID: String!
+    var movieQuoteListenerRegistration: ListenerRegistration?
     
 //    var movieQuote: MovieQuote!
     
@@ -19,8 +23,21 @@ class MovieQuoteDetailViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.edit,
                                                                  target: self,
                                                                  action: #selector(showEditQuoteDialog))
+        print("TODO: Listen for document")
         updateView()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        movieQuoteListenerRegistration = MovieQuoteDocumentManage.shared.startListening(for: movieQuoteDocumentID!){
+            self.updateView()
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        MovieQuoteDocumentManage.shared.stopListening(movieQuoteListenerRegistration)
     }
     
         //if viewDidLoad crashes, I could do this
@@ -33,8 +50,12 @@ class MovieQuoteDetailViewController: UIViewController {
         //TODO: update the view using the manager
 //        quoteLabel.text = movieQuote.quote
 //        movieLabel.text = movieQuote.movie
+        
+        if let mq = MovieQuoteDocumentManage.shared.latestMovieQuote {
+            quoteLabel.text = mq.quote
+            movieLabel.text = mq.movie
+        }
     }
-    
     @objc func showEditQuoteDialog(){
         
         
@@ -46,12 +67,14 @@ class MovieQuoteDetailViewController: UIViewController {
             textField.placeholder = "Quote"//the grey word
 //            textField.text = self.movieQuote.quote
             //TODO: Put in the quote from the manager's data
+            textField.text = MovieQuoteDocumentManage.shared.latestMovieQuote?.quote
         }
         
         alertController.addTextField { textField in
             textField.placeholder = "Movie"//the grey word
 //            textField.text = self.movieQuote.movie
             //TODO: Put in the quote from the manager's data
+            textField.text = MovieQuoteDocumentManage.shared.latestMovieQuote?.movie
         }
         
         //create an action and add it to the controller
@@ -73,6 +96,8 @@ class MovieQuoteDetailViewController: UIViewController {
 //            self.updateView()
             
             //TODO: implement update
+            MovieQuoteDocumentManage.shared.update(quote: quoteTextField.text!, movie: movieTextField.text!)
+            
         }
         alertController.addAction(editQuoteAction)
         
