@@ -10,6 +10,7 @@ import Foundation
 let kMovieQuotesCollectionPath = "MovieQuotes"
 let kMovieQuoteMovie = "movie"
 let kMovieQuoteQuote = "quote"
+let kMovieQuoteAuthorUid = "authorUid"
 
 //Pick between
 //let kMovieQuoteCreated = "created"

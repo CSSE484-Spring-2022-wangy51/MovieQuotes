@@ -52,6 +52,14 @@ class MovieQuotesTableViewController: UITableViewController {
             self.tableView.reloadData()
         }
         
+        //TODO: Eventually use real login, but for now use Guest Mode / Anonymous login
+        if(AuthManager.shared.isSignedIn){
+            print("User is already signed in")
+        }else{
+            print("No user, so signing in anonymously")
+            AuthManager.shared.signInAnonymously()
+        }
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -130,7 +138,10 @@ class MovieQuotesTableViewController: UITableViewController {
         return cell
     }
     
-
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        let mq = MovieQuotesCollectionManager.shared.latestMovieQuotes[indexPath.row]
+        return AuthManager.shared.currentUser?.uid == mq.authorUid
+    }
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

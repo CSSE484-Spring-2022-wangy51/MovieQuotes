@@ -18,9 +18,11 @@
 		3B7B50D427F5D2A700EE656A /* MovieQuotesCollectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7B50D327F5D2A700EE656A /* MovieQuotesCollectionManager.swift */; };
 		3B7B50D627F5D39900EE656A /* MovieQuoteDocumentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7B50D527F5D39900EE656A /* MovieQuoteDocumentManager.swift */; };
 		3B7B50D827F5D49400EE656A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7B50D727F5D49400EE656A /* Constants.swift */; };
-		3B7B50DB27F5DBAD00EE656A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3B7B50DA27F5DBAD00EE656A /* FirebaseAnalytics */; };
-		3B7B50DD27F5DBAD00EE656A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3B7B50DC27F5DBAD00EE656A /* FirebaseFirestore */; };
 		3B7B50DF27F5DE4200EE656A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B7B50DE27F5DE4200EE656A /* GoogleService-Info.plist */; };
+		3B803DEB27FF197A00ECD6F9 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3B803DEA27FF197A00ECD6F9 /* FirebaseAnalytics */; };
+		3B803DED27FF197A00ECD6F9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3B803DEC27FF197A00ECD6F9 /* FirebaseAuth */; };
+		3B803DEF27FF197A00ECD6F9 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3B803DEE27FF197A00ECD6F9 /* FirebaseFirestore */; };
+		3B938E9F27FF10A90047DB3D /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B938E9E27FF10A90047DB3D /* AuthManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,7 @@
 		3B7B50D527F5D39900EE656A /* MovieQuoteDocumentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieQuoteDocumentManager.swift; sourceTree = "<group>"; };
 		3B7B50D727F5D49400EE656A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3B7B50DE27F5DE4200EE656A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3B938E9E27FF10A90047DB3D /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,8 +48,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B7B50DB27F5DBAD00EE656A /* FirebaseAnalytics in Frameworks */,
-				3B7B50DD27F5DBAD00EE656A /* FirebaseFirestore in Frameworks */,
+				3B803DEB27FF197A00ECD6F9 /* FirebaseAnalytics in Frameworks */,
+				3B803DED27FF197A00ECD6F9 /* FirebaseAuth in Frameworks */,
+				3B803DEF27FF197A00ECD6F9 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +89,7 @@
 				3B7B50D327F5D2A700EE656A /* MovieQuotesCollectionManager.swift */,
 				3B7B50D527F5D39900EE656A /* MovieQuoteDocumentManager.swift */,
 				3B7B50D727F5D49400EE656A /* Constants.swift */,
+				3B938E9E27FF10A90047DB3D /* AuthManager.swift */,
 			);
 			path = MovieQuotes;
 			sourceTree = "<group>";
@@ -106,8 +111,9 @@
 			);
 			name = MovieQuotes;
 			packageProductDependencies = (
-				3B7B50DA27F5DBAD00EE656A /* FirebaseAnalytics */,
-				3B7B50DC27F5DBAD00EE656A /* FirebaseFirestore */,
+				3B803DEA27FF197A00ECD6F9 /* FirebaseAnalytics */,
+				3B803DEC27FF197A00ECD6F9 /* FirebaseAuth */,
+				3B803DEE27FF197A00ECD6F9 /* FirebaseFirestore */,
 			);
 			productName = MovieQuotes;
 			productReference = 3B7B50B627F1DDAC00EE656A /* MovieQuotes.app */;
@@ -138,7 +144,7 @@
 			);
 			mainGroup = 3B7B50AD27F1DDAC00EE656A;
 			packageReferences = (
-				3B7B50D927F5DBAD00EE656A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				3B803DE927FF197A00ECD6F9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 3B7B50B727F1DDAC00EE656A /* Products */;
 			projectDirPath = "";
@@ -169,6 +175,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B7B50BA27F1DDAC00EE656A /* AppDelegate.swift in Sources */,
+				3B938E9F27FF10A90047DB3D /* AuthManager.swift in Sources */,
 				3B7B50D227F3342E00EE656A /* MovieQuoteDetailViewController.swift in Sources */,
 				3B7B50D027F1E59300EE656A /* MovieQuote.swift in Sources */,
 				3B7B50D427F5D2A700EE656A /* MovieQuotesCollectionManager.swift in Sources */,
@@ -395,7 +402,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3B7B50D927F5DBAD00EE656A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		3B803DE927FF197A00ECD6F9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
@@ -406,14 +413,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3B7B50DA27F5DBAD00EE656A /* FirebaseAnalytics */ = {
+		3B803DEA27FF197A00ECD6F9 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3B7B50D927F5DBAD00EE656A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 3B803DE927FF197A00ECD6F9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalytics;
 		};
-		3B7B50DC27F5DBAD00EE656A /* FirebaseFirestore */ = {
+		3B803DEC27FF197A00ECD6F9 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3B7B50D927F5DBAD00EE656A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 3B803DE927FF197A00ECD6F9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		3B803DEE27FF197A00ECD6F9 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3B803DE927FF197A00ECD6F9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
