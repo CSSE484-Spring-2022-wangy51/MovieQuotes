@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B76F4C4280D9D0A00672DBA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76F4C3280D9D0A00672DBA /* LoginViewController.swift */; };
 		3B7B50BA27F1DDAC00EE656A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7B50B927F1DDAC00EE656A /* AppDelegate.swift */; };
 		3B7B50BC27F1DDAC00EE656A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7B50BB27F1DDAC00EE656A /* SceneDelegate.swift */; };
 		3B7B50C127F1DDAC00EE656A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B7B50BF27F1DDAC00EE656A /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B76F4C3280D9D0A00672DBA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3B7B50B627F1DDAC00EE656A /* MovieQuotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieQuotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B7B50B927F1DDAC00EE656A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B7B50BB27F1DDAC00EE656A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				3B7B50D527F5D39900EE656A /* MovieQuoteDocumentManager.swift */,
 				3B7B50D727F5D49400EE656A /* Constants.swift */,
 				3B938E9E27FF10A90047DB3D /* AuthManager.swift */,
+				3B76F4C3280D9D0A00672DBA /* LoginViewController.swift */,
 			);
 			path = MovieQuotes;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 				3B7B50CE27F1E02500EE656A /* MovieQuotesTableViewController.swift in Sources */,
 				3B7B50BC27F1DDAC00EE656A /* SceneDelegate.swift in Sources */,
 				3B7B50D627F5D39900EE656A /* MovieQuoteDocumentManager.swift in Sources */,
+				3B76F4C4280D9D0A00672DBA /* LoginViewController.swift in Sources */,
 				3B7B50D827F5D49400EE656A /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

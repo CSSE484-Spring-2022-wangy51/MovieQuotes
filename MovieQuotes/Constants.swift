@@ -15,3 +15,6 @@ let kMovieQuoteAuthorUid = "authorUid"
 //Pick between
 //let kMovieQuoteCreated = "created"
 let kMovieQuoteLastTouched = "lastTouched"
+
+
+let kShowListSegue = "showListSegue"
