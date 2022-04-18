@@ -21,10 +21,15 @@ class MovieQuotesCollectionManager{
     
     var latestMovieQuotes = [MovieQuote]()
     
-    func startListening(changeListener: @escaping (() -> Void)) -> ListenerRegistration{// recieves a function that takes no parameter and return void
+    func startListening(filterByAuthor authorFilter: String?, changeListener: @escaping (() -> Void)) -> ListenerRegistration{// recieves a function that takes no parameter and return void
         //DONE: receive change listener
         
-        let query = _collectionRef.order(by: kMovieQuoteLastTouched, descending: true).limit(to: 50)// order the collection
+        var query = _collectionRef.order(by: kMovieQuoteLastTouched, descending: true).limit(to: 50)// order the collection
+        
+        if let authorFilter = authorFilter {
+            print("TODO: filter by this author \(authorFilter)")
+            query = query.whereField(kMovieQuoteAuthorUid, isEqualTo: authorFilter)
+        }
         
         return query.addSnapshotListener { querySnapshot, error in
                 guard let documents = querySnapshot?.documents else {// if exist then carry on, else stop and print
@@ -33,7 +38,7 @@ class MovieQuotesCollectionManager{
                 }
             self.latestMovieQuotes.removeAll()
                 for document in documents {
-                    print("\(document.documentID) => \(document.data())")
+//                    print("\(document.documentID) => \(document.data())")
                     self.latestMovieQuotes.append(MovieQuote(doucmentSnapshot: document))
                 }
                 changeListener()
@@ -42,7 +47,7 @@ class MovieQuotesCollectionManager{
     }
     
     func stopListening(_ listenerRegistration: ListenerRegistration?){
-        print("Removing the listener")
+        
         listenerRegistration?.remove();
         
     }

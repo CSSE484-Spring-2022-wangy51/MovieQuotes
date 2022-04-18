@@ -24,20 +24,14 @@ class AuthManager{
     
     func addLoginObserver(callback: @escaping (()->Void)) -> AuthStateDidChangeListenerHandle{
         return Auth.auth().addStateDidChangeListener { auth, user in
-            if (user == nil){
+            if (user != nil){
                 callback()
             }
         }
     }
     
     func addLogoutObserver (callback:@escaping (()->Void)) -> AuthStateDidChangeListenerHandle{
-////        if authDidChangeHandle != nil{
-////            Auth.auth().removeStateDidChangeListener(authDidChangeHandle!)
-////        }
-//
-//        if let authHandle = authDidChangeHandle{
-//            Auth.auth().removeStateDidChangeListener(authHandle)
-//        }
+
         return Auth.auth().addStateDidChangeListener { auth, user in
             if (user == nil){
                 callback()
@@ -84,5 +78,14 @@ class AuthManager{
             print("Anonymous sign in complete")
         }
     }
+    
+    func signOUt(){
+        do{
+            try Auth.auth().signOut()
+        } catch {
+            print("Sign out failed: \(error)")
+        }
+    }
+    
     
 }

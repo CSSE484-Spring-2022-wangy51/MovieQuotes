@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import AudioToolbox
 
 class MovieQuoteTableViewCell: UITableViewCell{
     @IBOutlet weak var quoteLabel: UILabel!
@@ -19,8 +20,8 @@ class MovieQuotesTableViewController: UITableViewController {
     let kMovieQuoteCell = "MovieQuoteCell"// k for constant
     let kMovieQuoteDetailSegue = "myMovieQuoteDetailSegue"
     var movieQuotesListenerRegistration: ListenerRegistration?
-//    let names = ["Helen", "Lisa", "Peter","Dave"]
-//    var movieQuotes = [MovieQuote]()
+    
+    var isShowingAllQuotes = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,26 +32,20 @@ class MovieQuotesTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.leftBarButtonItem = self.editButtonItem
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add,
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add,
+//                                                                 target: self,
+//                                                                 action: #selector(showAddQuoteDialog))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "☰",
+                                                                 style: UIBarButtonItem.Style.plain,
                                                                  target: self,
-                                                                 action: #selector(showAddQuoteDialog))
+                                                                 action: #selector(showMenue))
         
-        //Hard code some movie quotes
-//        let mq1 = MovieQuote(quote: "I'll be back", movie: "The Terminator")
-//        let mq2 = MovieQuote(quote: "Yo Adrian", movie: "Rocky")
-//        movieQuotes.append(mq1)
-//        movieQuotes.append(mq2)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        movieQuotesListenerRegistration = MovieQuotesCollectionManager.shared.startListening{
-//            print("The movie quote were updated")
-//            for mq in MovieQuotesCollectionManager.shared.latestMovieQuotes {
-//                print("\(mq.quote) on \(mq.movie)")
-//            }
-            self.tableView.reloadData()
-        }
+        startListeningForMovieQuotes()
         
         //TODO: Eventually use real login, but for now use Guest Mode / Anonymous login
         if(AuthManager.shared.isSignedIn){
@@ -64,11 +59,66 @@ class MovieQuotesTableViewController: UITableViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        stopListeningForMovieQuotes()
+    }
+    
+    
+    func startListeningForMovieQuotes(){
+//        movieQuotesListenerRegistration = MovieQuotesCollectionManager.shared.startListening{
+//            self.tableView.reloadData()
+//        }
+        stopListeningForMovieQuotes()// does nothing the 1st time, stop the last listener
+        movieQuotesListenerRegistration = MovieQuotesCollectionManager.shared.startListening(filterByAuthor: isShowingAllQuotes ? nil : AuthManager.shared.currentUser?.uid)
+        {
+            self.tableView.reloadData()
+        }
+    }
+    
+    
+    func stopListeningForMovieQuotes(){
         MovieQuotesCollectionManager.shared.stopListening(movieQuotesListenerRegistration)
     }
     
+    
+    @objc func showMenue(){
+       let alertController = UIAlertController(title: nil,
+                                               message: nil,
+                                               preferredStyle: UIAlertController.Style.actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel) { action in
+            print("You pressed cancel")
+        }
+        alertController.addAction(cancelAction)
+        
+        //show all quotes/ show only my quote button
+        let showOnlyMyQuotesAction = UIAlertAction(title: isShowingAllQuotes ? "Show only my quotes" : "Show all quotes",
+                                                   style: UIAlertAction.Style.default) { action in
+            print("show only my quotes")
+            self.isShowingAllQuotes = !self.isShowingAllQuotes
+            
+            self.startListeningForMovieQuotes()
+        }
+        alertController.addAction(showOnlyMyQuotesAction)
+        
+        //show add quote
+        let showAddQuoteAction = UIAlertAction(title: "Add a quotes", style: UIAlertAction.Style.default) { action in
+            self.showAddQuoteDialog()
+        }
+        alertController.addAction(showAddQuoteAction)
+        
+        //sign out
+        let signOutAction = UIAlertAction(title: "Sign Out", style: UIAlertAction.Style.default) { action in
+//            print("sign out")
+            AuthManager.shared.signOUt()
+        }
+        alertController.addAction(signOutAction)
+        
+        present(alertController, animated: true)
+    }
+    
+    
     //the override in objectC
-    @objc func showAddQuoteDialog(){
+    func showAddQuoteDialog(){
         print("you pressed the add button")
         
         let alertController = UIAlertController(title: "Create a new movie quote",
@@ -99,8 +149,6 @@ class MovieQuotesTableViewController: UITableViewController {
             print("Movie: \(movieTextField.text!)")
             
             let mq = MovieQuote(quote: quoteTextField.text!, movie: movieTextField.text!)
-//            self.movieQuotes.insert(mq, at: 0)
-//            self.tableView.reloadData()
             
             MovieQuotesCollectionManager.shared.add(mq)
             
@@ -115,7 +163,6 @@ class MovieQuotesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // return the number of rows
-//        return movieQuotes.count
         return MovieQuotesCollectionManager.shared.latestMovieQuotes.count
     }
 
@@ -124,13 +171,7 @@ class MovieQuotesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: self.kMovieQuoteCell, for: indexPath) as! MovieQuoteTableViewCell
 
 //         Configure the cell...
-//        cell.textLabel?.text = "This is row \(indexPath.row)"//indexPath has only .row and .session
-//        cell.textLabel?.text =[indexPath.row]
-//        cell.textLabel?.text = movieQuotes[indexPath.row].quote
-//        cell.detailTextLabel?.text = movieQuotes[indexPath.row].movie
-        
-//        cell.quoteLabel.text = movieQuotes[indexPath.row].quote
-//        cell.movieLabel.text = movieQuotes[indexPath.row].movie
+
         let mq = MovieQuotesCollectionManager.shared.latestMovieQuotes[indexPath.row]
         cell.quoteLabel.text = mq.quote
         cell.movieLabel.text = mq.movie
@@ -163,9 +204,8 @@ class MovieQuotesTableViewController: UITableViewController {
             let mqdvc = segue.destination as! MovieQuoteDetailViewController
             if let indexPath = tableView.indexPathForSelectedRow {
                 // Pass the selected object to the new view controller.
-//                mqdvc.movieQuote = movieQuotes[indexPath.row]
                 
-                //TODO: inform the detail view about the MovieQuote
+                //DONE: inform the detail view about the MovieQuote
                 let mq = MovieQuotesCollectionManager.shared.latestMovieQuotes[indexPath.row]
                 mqdvc.movieQuoteDocumentID = mq.documentID
                 
