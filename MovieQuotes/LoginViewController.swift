@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
 
 class LoginViewController: UIViewController {
 
@@ -75,6 +76,37 @@ class LoginViewController: UIViewController {
 
     }
     
+    @IBAction func pressedGoogleSignIn(_ sender: Any) {
+        print("TODO: Signin with google")
+        
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+
+        // Create Google Sign In configuration object.
+        let config = GIDConfiguration(clientID: clientID)
+
+        // Start the sign in flow!
+        GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { user, error in
+
+          if let error = error {
+            print("Error with google sign in \(error)")
+            return
+          }
+
+          guard
+            let authentication = user?.authentication,
+            let idToken = authentication.idToken
+          else {
+            return
+          }
+
+          let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                         accessToken: authentication.accessToken)
+
+          print("Google Sign In worked! Now use the credential to do the real Firebase sign in")
+            
+            AuthManager.shared.signInWithGoogleCredential(credential)
+        }
+    }
     /*
     // MARK: - Navigation
 
