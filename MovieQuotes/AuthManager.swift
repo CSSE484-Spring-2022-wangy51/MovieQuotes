@@ -79,6 +79,17 @@ class AuthManager{
         }
     }
     
+    func signInWithRosefireToken(_ rosefireToken: String){
+        Auth.auth().signIn(withCustomToken: rosefireToken) { (authResult, error) in
+            if let error = error {
+              print("Firebase sign in error! \(error)")
+              return
+            }
+            // User is signed in using Firebase!
+            print("The user is now actually signed in using the Rosefire token")
+          }
+    }
+    
     func signOUt(){
         do{
             try Auth.auth().signOut()

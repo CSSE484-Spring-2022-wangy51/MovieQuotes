@@ -195,13 +195,28 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="at2-oE-YG1">
+                                <rect key="frame" x="87" y="408" width="240" height="38"/>
+                                <color key="backgroundColor" red="0.50196078431372548" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="KBm-KX-htY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Rosefire"/>
+                                <connections>
+                                    <action selector="pressedRosefire:" destination="Qns-95-LuS" eventType="touchUpInside" id="A7P-uq-VuE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DKS-v8-CO3"/>
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                         <constraints>
+                            <constraint firstItem="at2-oE-YG1" firstAttribute="top" secondItem="9Rb-8E-V3g" secondAttribute="bottom" constant="80" id="1cM-O1-f2t"/>
                             <constraint firstItem="DKS-v8-CO3" firstAttribute="trailing" secondItem="9Rb-8E-V3g" secondAttribute="trailing" constant="20" id="C8k-iA-q2U"/>
                             <constraint firstItem="9Rb-8E-V3g" firstAttribute="leading" secondItem="DKS-v8-CO3" secondAttribute="leading" constant="20" id="Jqb-SR-64R"/>
                             <constraint firstItem="9Rb-8E-V3g" firstAttribute="top" secondItem="DKS-v8-CO3" secondAttribute="top" constant="50" id="ehN-OO-BX4"/>
+                            <constraint firstItem="at2-oE-YG1" firstAttribute="centerX" secondItem="DKS-v8-CO3" secondAttribute="centerX" id="g5V-jR-f7u"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DWm-ZA-R3A"/>
