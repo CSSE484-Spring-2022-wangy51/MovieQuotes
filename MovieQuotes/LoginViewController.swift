@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loginHandle = AuthManager.shared.addLoginObserver {
-            print("TODO:  There is already someone signed in! Skip the LoginViewController")
+//            print("TODO:  There is already someone signed in! Skip the LoginViewController")
             self.performSegue(withIdentifier: kShowListSegue, sender: self)
         }
     }
@@ -41,13 +41,18 @@ class LoginViewController: UIViewController {
         let email = emailTextField.text!
         let password = passwordTexField.text!
         print("press new user. Email = \(email), Password = \(password)")
+        
+        AuthManager.shared.signInNewEmailPasswordUser(email: email, password: password)
     }
     
     @IBAction func pressedLoginExistingUser(_ sender: Any) {
        
-        let email = emailTextField.text
-        let password = passwordTexField.text
+        let email = emailTextField.text!
+        let password = passwordTexField.text!
         print("press log in existing user. Email = \(email), Password = \(password)")
+        
+        AuthManager.shared.loginExistingEmailPasswordUser(email: email, password: password)
+        
     }
     
 
