@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		3B74F6BD280EE329008A6885 /* Rosefire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B74F6BC280EE329008A6885 /* Rosefire.swift */; };
 		3B74F6C0280EEC7D008A6885 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 3B74F6BF280EEC7D008A6885 /* GoogleSignIn */; };
+		3B74F6C32811831E008A6885 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 3B74F6C22811831E008A6885 /* SideMenu */; };
+		3B74F6C528118415008A6885 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B74F6C428118415008A6885 /* SideMenuViewController.swift */; };
+		3B74F6C7281190E6008A6885 /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B74F6C6281190E6008A6885 /* ProfilePageViewController.swift */; };
 		3B76F4C4280D9D0A00672DBA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76F4C3280D9D0A00672DBA /* LoginViewController.swift */; };
 		3B7B50BA27F1DDAC00EE656A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7B50B927F1DDAC00EE656A /* AppDelegate.swift */; };
 		3B7B50BC27F1DDAC00EE656A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7B50BB27F1DDAC00EE656A /* SceneDelegate.swift */; };
@@ -30,6 +33,8 @@
 
 /* Begin PBXFileReference section */
 		3B74F6BC280EE329008A6885 /* Rosefire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rosefire.swift; sourceTree = "<group>"; };
+		3B74F6C428118415008A6885 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
+		3B74F6C6281190E6008A6885 /* ProfilePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
 		3B76F4C3280D9D0A00672DBA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3B7B50B627F1DDAC00EE656A /* MovieQuotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieQuotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B7B50B927F1DDAC00EE656A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +61,7 @@
 				3B803DEB27FF197A00ECD6F9 /* FirebaseAnalytics in Frameworks */,
 				3B74F6C0280EEC7D008A6885 /* GoogleSignIn in Frameworks */,
 				3B803DED27FF197A00ECD6F9 /* FirebaseAuth in Frameworks */,
+				3B74F6C32811831E008A6885 /* SideMenu in Frameworks */,
 				3B803DEF27FF197A00ECD6F9 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,6 +104,8 @@
 				3B938E9E27FF10A90047DB3D /* AuthManager.swift */,
 				3B76F4C3280D9D0A00672DBA /* LoginViewController.swift */,
 				3B74F6BC280EE329008A6885 /* Rosefire.swift */,
+				3B74F6C428118415008A6885 /* SideMenuViewController.swift */,
+				3B74F6C6281190E6008A6885 /* ProfilePageViewController.swift */,
 			);
 			path = MovieQuotes;
 			sourceTree = "<group>";
@@ -123,6 +131,7 @@
 				3B803DEC27FF197A00ECD6F9 /* FirebaseAuth */,
 				3B803DEE27FF197A00ECD6F9 /* FirebaseFirestore */,
 				3B74F6BF280EEC7D008A6885 /* GoogleSignIn */,
+				3B74F6C22811831E008A6885 /* SideMenu */,
 			);
 			productName = MovieQuotes;
 			productReference = 3B7B50B627F1DDAC00EE656A /* MovieQuotes.app */;
@@ -155,6 +164,7 @@
 			packageReferences = (
 				3B803DE927FF197A00ECD6F9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				3B74F6BE280EEC7D008A6885 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				3B74F6C12811831E008A6885 /* XCRemoteSwiftPackageReference "SideMenu" */,
 			);
 			productRefGroup = 3B7B50B727F1DDAC00EE656A /* Products */;
 			projectDirPath = "";
@@ -188,10 +198,12 @@
 				3B938E9F27FF10A90047DB3D /* AuthManager.swift in Sources */,
 				3B7B50D227F3342E00EE656A /* MovieQuoteDetailViewController.swift in Sources */,
 				3B7B50D027F1E59300EE656A /* MovieQuote.swift in Sources */,
+				3B74F6C528118415008A6885 /* SideMenuViewController.swift in Sources */,
 				3B7B50D427F5D2A700EE656A /* MovieQuotesCollectionManager.swift in Sources */,
 				3B7B50CE27F1E02500EE656A /* MovieQuotesTableViewController.swift in Sources */,
 				3B74F6BD280EE329008A6885 /* Rosefire.swift in Sources */,
 				3B7B50BC27F1DDAC00EE656A /* SceneDelegate.swift in Sources */,
+				3B74F6C7281190E6008A6885 /* ProfilePageViewController.swift in Sources */,
 				3B7B50D627F5D39900EE656A /* MovieQuoteDocumentManager.swift in Sources */,
 				3B76F4C4280D9D0A00672DBA /* LoginViewController.swift in Sources */,
 				3B7B50D827F5D49400EE656A /* Constants.swift in Sources */,
@@ -422,6 +434,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		3B74F6C12811831E008A6885 /* XCRemoteSwiftPackageReference "SideMenu" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jonkykong/SideMenu";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		3B803DE927FF197A00ECD6F9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -437,6 +457,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3B74F6BE280EEC7D008A6885 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignIn;
+		};
+		3B74F6C22811831E008A6885 /* SideMenu */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3B74F6C12811831E008A6885 /* XCRemoteSwiftPackageReference "SideMenu" */;
+			productName = SideMenu;
 		};
 		3B803DEA27FF197A00ECD6F9 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

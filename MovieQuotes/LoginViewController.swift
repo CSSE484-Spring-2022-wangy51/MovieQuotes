@@ -41,7 +41,7 @@ class LoginViewController: UIViewController {
  
         let email = emailTextField.text!
         let password = passwordTexField.text!
-        print("press new user. Email = \(email), Password = \(password)")
+//        print("press new user. Email = \(email), Password = \(password)")
         
         AuthManager.shared.signInNewEmailPasswordUser(email: email, password: password)
     }
@@ -50,7 +50,7 @@ class LoginViewController: UIViewController {
        
         let email = emailTextField.text!
         let password = passwordTexField.text!
-        print("press log in existing user. Email = \(email), Password = \(password)")
+//        print("press log in existing user. Email = \(email), Password = \(password)")
         
         AuthManager.shared.loginExistingEmailPasswordUser(email: email, password: password)
         

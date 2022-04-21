@@ -27,7 +27,7 @@ class MovieQuotesCollectionManager{
         var query = _collectionRef.order(by: kMovieQuoteLastTouched, descending: true).limit(to: 50)// order the collection
         
         if let authorFilter = authorFilter {
-            print("TODO: filter by this author \(authorFilter)")
+//            print("TODO: filter by this author \(authorFilter)")
             query = query.whereField(kMovieQuoteAuthorUid, isEqualTo: authorFilter)
         }
         
