@@ -13,15 +13,20 @@ class MovieQuoteDetailViewController: UIViewController {
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var movieLabel: UILabel!
     
+    @IBOutlet weak var authorBoxStackView: UIStackView!
+    @IBOutlet weak var authorProfileImageView: UIImageView!
+    @IBOutlet weak var authorNameLabel: UILabel!
+    
     var movieQuoteDocumentID: String!
     var movieQuoteListenerRegistration: ListenerRegistration?
+    var userListenerRegistration: ListenerRegistration?
     
 //    var movieQuote: MovieQuote!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 //        print("TODO: Listen for document")
-        updateView()
+//        updateView()
         
     }
     
@@ -41,7 +46,18 @@ class MovieQuoteDetailViewController: UIViewController {
         movieQuoteListenerRegistration = MovieQuoteDocumentManage.shared.startListening(for: movieQuoteDocumentID!){
             self.updateView()
             self.showOrHideEditButton()
+            
+            //Start listeining for the user
+            self.authorBoxStackView.isHidden = true
+            if let authorUid = MovieQuoteDocumentManage.shared.latestMovieQuote?.authorUid{
+                UserDocumentManager.shared.stopListening(self.userListenerRegistration)
+                self.userListenerRegistration = UserDocumentManager.shared.startListening(for: authorUid){
+                    self.updateAuthorBox()
+                }
+            }
+            
         }
+
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -49,22 +65,25 @@ class MovieQuoteDetailViewController: UIViewController {
         MovieQuoteDocumentManage.shared.stopListening(movieQuoteListenerRegistration)
     }
     
-        //if viewDidLoad crashes, I could do this
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        updateView()
-//    }
     
     func updateView(){
-        //TODO: update the view using the manager
-//        quoteLabel.text = movieQuote.quote
-//        movieLabel.text = movieQuote.movie
-        
         if let mq = MovieQuoteDocumentManage.shared.latestMovieQuote {
             quoteLabel.text = mq.quote
             movieLabel.text = mq.movie
         }
     }
+    
+    func updateAuthorBox(){
+//        print("TODO: Update the authorBox with name \(UserDocumentManager.shared.name)")
+//        print("TODO: Update the authorBox with photoURL \(UserDocumentManager.shared.photoURL)")
+        
+        self.authorBoxStackView.isHidden = UserDocumentManager.shared.name.isEmpty && UserDocumentManager.shared.photoURL.isEmpty
+        authorNameLabel.text = UserDocumentManager.shared.name
+        if !UserDocumentManager.shared.photoURL.isEmpty {
+            ImageUtils.load(imageView: authorProfileImageView, from: UserDocumentManager.shared.photoURL)
+        }
+    }
+    
     @objc func showEditQuoteDialog(){
         
         

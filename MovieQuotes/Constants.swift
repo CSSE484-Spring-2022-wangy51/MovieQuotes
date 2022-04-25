@@ -22,3 +22,8 @@ let kShowListSegue = "showListSegue"
 let kRosefireRegistryToken = "a4d82528-007b-4150-9938-6b6e5c11356f"
 
 let kProfileSegue = "ProfiileSegue"
+
+//Firestore - User documents
+let kUserCollectionPath = "Users"
+let kUserName = "name"
+let kUserPhotoURL = "photoURL"

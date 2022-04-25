@@ -26,12 +26,14 @@ class SideMenuViewController: UIViewController {
     
     @IBAction func pressedShowAllQuotes(_ sender: Any) {
         dismiss(animated: true)
+        tableViewController.isEditing = false
         tableViewController.isShowingAllQuotes = true
         tableViewController.startListeningForMovieQuotes()
     }
     
     @IBAction func pressedShowMyQuotes(_ sender: Any) {
         dismiss(animated: true)
+        tableViewController.isEditing = false
         tableViewController.isShowingAllQuotes = false
         tableViewController.startListeningForMovieQuotes()
         
