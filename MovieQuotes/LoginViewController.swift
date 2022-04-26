@@ -15,6 +15,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     
     var loginHandle: AuthStateDidChangeListenerHandle?
+    var rosefireName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,7 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        rosefireName = nil
         loginHandle = AuthManager.shared.addLoginObserver {
 //            print("TODO:  There is already someone signed in! Skip the LoginViewController")
             self.performSegue(withIdentifier: kShowListSegue, sender: self)
@@ -67,7 +69,8 @@ class LoginViewController: UIViewController {
           }
 //          print("Result = \(result!.token!)")
 //          print("Result = \(result!.username!)")
-          print("Result = \(result!.name!)")
+        print("Result = \(result!.name!)")
+        self.rosefireName = result!.name!
 //          print("Result = \(result!.email!)")
 //          print("Result = \(result!.group!)")
             AuthManager.shared.signInWithRosefireToken(result!.token)
@@ -107,14 +110,21 @@ class LoginViewController: UIViewController {
             AuthManager.shared.signInWithGoogleCredential(credential)
         }
     }
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        // Make sure the segue identifier is correct
+        if segue.identifier == kShowListSegue {
+//            print("Name = \(rosefireName ?? AuthManager.shared.currentUser!.displayName)")
+//            print("PhotoURL = \(AuthManager.shared.currentUser!.photoURL)")
+//
+            UserDocumentManager.shared.addNewUserMaybe(uid: AuthManager.shared.currentUser!.uid,
+                                                       name: (rosefireName ?? AuthManager.shared.currentUser!.displayName),
+                                                       photoURL: AuthManager.shared.currentUser!.photoURL?.absoluteString)
+        }
     }
-    */
+    
 
 }

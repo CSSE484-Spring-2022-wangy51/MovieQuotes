@@ -97,6 +97,9 @@
                                         <rect key="frame" x="0.0" y="50" width="354" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="displayNameDidChange:" destination="wbS-kL-VAv" eventType="editingChanged" id="JO8-Ws-KFE"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile Photo:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5y-vX-TJf">
                                         <rect key="frame" x="0.0" y="100" width="354" height="34"/>
@@ -122,6 +125,9 @@
                                 <state key="normal" title="Change Profile Photo" image="edit_18pt">
                                     <color key="titleColor" systemColor="systemGray4Color"/>
                                 </state>
+                                <connections>
+                                    <action selector="pressedChangePhoto:" destination="wbS-kL-VAv" eventType="touchUpInside" id="6AA-ZL-bd1"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="nh9-Dn-VpQ"/>
